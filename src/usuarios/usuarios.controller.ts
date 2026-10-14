@@ -23,11 +23,17 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
+  // OPTIONS permite consultar qué métodos HTTP admite una ruta sin crear,
+  // modificar ni eliminar datos. Los clientes también pueden usarlo como
+  // petición previa (preflight) antes de una solicitud entre distintos orígenes.
+  // El encabezado Allow enumera los métodos disponibles para toda la colección.
   @Options()
   @HttpCode(204)
   @Header('Allow', 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS')
   options(): void {}
 
+  // Esta variante informa los métodos permitidos para un usuario específico.
+  // El código 204 indica que la respuesta no incluye contenido en el cuerpo.
   @Options(':id')
   @HttpCode(204)
   @Header('Allow', 'GET, HEAD, PUT, PATCH, DELETE, OPTIONS')
